@@ -1,0 +1,183 @@
+\documentclass{beamer} 
+\usepackage[latin1]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{amssymb,amsmath} %para usar simbolos matematicos 
+\usepackage{palatino} 
+\usepackage{subfig}
+%\usepackage{sidecap}
+%\usepackage{beamerthemesplit} 
+%\setbeamercovered{transparent} % progressão transparente 
+%\setbeamercovered{invisible}
+%\usetheme{Warsaw} % um dos temas
+%\usetheme{Montpellier} % um dos temas
+%\usetheme{Berkeley} % um dos temas
+%\usetheme{Antibes} % um dos temas 
+\title{Calendaring for Wide Area Networks}
+\subtitle{
+\textit{Paper Presentation}}
+\author{Alaelson Jatobá\\Sérgio Timóteo}
+\institute{Electrical Engineering Graduate Program\\
+Computation \& Electrical Engineering School\\
+University of Campinas} 
+\date{18 de junho de 2015} 
+
+%\pgfdeclareimage[height=0.4cm]{logo}{figuras/ufabc_logo.jpg}
+%\logo{\pgfuseimage{logo}}
+
+
+\begin{document} 
+%\newcommand*\oldmacro{}
+%\let\oldmacro\insertshortauthor% save previous definition
+%\renewcommand*\insertshortauthor{%
+  %\leftskip=.3cm% before the author could be a plus1fill ...
+  %\insertframenumber\,/\,\inserttotalframenumber\hfill\oldmacro}
+
+%\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{footline}[page number]
+\setbeamertemplate{navigation symbols}{}
+
+\frame{
+\titlepage
+}
+
+\frame{
+\centering
+\huge Agradecimentos
+
+}
+
+\section[Summary]{}
+\frame{
+\transdissolve<1>[duration=0.3]
+\frametitle{Summary}
+\tableofcontents
+}
+
+%Destaca o sunário no início de cada sessão
+%\AtBeginSection[]
+%{
+%\begin{frame}
+%\frametitle{Sumário}
+%\tableofcontents[currentsection]
+%\end{frame}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introdução}
+\subsection{Motivação}
+\frame{
+\frametitle{Motivação}  
+
+\begin{itemize} 
+\item \textit{Wavelength Division Multiplexing} - WDM:
+\begin{itemize}
+	\item Maior capacidade de transmissão;
+	\item Funções de OAM\&P: manuais, demoradas e de alto custo;
+	\newline
+\end{itemize}
+
+\item Solução:
+\begin{itemize}
+\item \textit{Generalized Multiprotocol Label Switching} (GMPLS);
+%Automatização de funções de OAM\&P;
+\item \textit{Optical Transport Network - OTN};
+% Melhor monitoramento e análise de desempenho;
+\newline
+\end{itemize}
+\item Dificuldades:
+\begin{itemize}
+\item Poucos trabalhos sobre \textit{testbeds} com GMPLS e/ou OTN;
+\item Nenhum trabalho experimental com GMPLS e OTN foi feito no Brasil;
+\end{itemize}
+\end{itemize} 
+}
+ 
+
+\subsection{Objetivos}
+
+\frame{ 
+\frametitle{Objetivos}  
+
+\begin{itemize} 
+\item Desenvolver uma aplicação de controle e monitoramento caminhos óticos:
+
+\begin{itemize}
+	\item Rede de transporte ótica ITU-T G.709;
+\item Plano de controle GMPLS;
+\item Considerar restrições de camada física.
+\newline
+\end{itemize}
+
+\item Parâmetros:
+\begin{itemize}
+	\item Intensidade de potência ótica;
+	\item Taxa de erros de bit (BER);
+	\item Alarmes do G.709;
+	\item Ganho dos amplificadores;
+	\newline
+\end{itemize}
+\item Desafio:
+
+\begin{itemize}
+	\item Desenvolver e testar o \textit{software} em um ambiente real.
+\end{itemize}
+
+\end{itemize} } 
+
+
+\section{Redes óticas}
+\subsection{Conceitos Básicos}
+\frame{
+\frametitle{Redes óticas}
+
+\begin{itemize}
+	\item São redes nas quais os dispositivos estão conectados por meio de enlaces de fibras óticas;
+	\newline
+	
+
+	\item Um caminho ótico é uma conexão fim a fim que utiliza um comprimento de onda em cada enlace ótico;
+	\newline
+	\item WDM:
+	\newline
+	\begin{itemize}
+		\item Canais WDM = Comprimentos de onda;
+		\item Grade do ITU-T: 80 canais ($100~GHz$);
+		\newline \newline
+		Exemplo: largura de banda = $3,2~Tbps$ (40~Gbps/canal)
+	\end{itemize}
+\end{itemize}
+}
+
+
+\frame{ 
+\transdissolve<1>[duration=0.3]
+\frametitle{Conclusão}
+\begin{itemize}
+	\item O Algoritmo proposto tem baixa complexidade;
+	\newline
+	\item Não altera os protocolos do GMPLS;
+	\newline
+	\item Três novos indicativos de erros para as mensagens \textit{NOTIFY};
+		\newline
+	\item Aplicação desenvolvida: controle automático, dinâmico e distribuído dos caminhos óticos.
+
+	
+	
+\end{itemize}
+}
+
+
+\frame{ 
+\frametitle{}
+\begin{center}
+\transdissolve<1>[duration=0.3]
+	\Huge Obrigado!
+\end{center}
+}
+
+\frame{
+\transdissolve<1>[duration=0.3]
+\titlepage
+}
+
+\end{document}
