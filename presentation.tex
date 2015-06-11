@@ -1,0 +1,111 @@
+\documentclass{beamer} 
+\usepackage[latin1]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{amssymb,amsmath} %para usar simbolos matematicos 
+\usepackage{palatino} 
+%\usepackage{epstopdf}
+%\usepackage{textpos}
+%\usepackage{beamerthemesplit} 
+\setbeamercovered{transparent} % progressão transparente 
+%\setbeamercovered{invisible}
+%\usetheme{Warsaw} % um dos temas
+\usetheme{Montpellier} % um dos temas
+%\usetheme{Berkeley} % um dos temas
+%\usetheme{Antibes} % um dos temas 
+
+\title{Calendaring for Wide Area Networks}
+\subtitle{Srikanth Kandula, Ishai Menache, Roy Schwartz, and Spandana Raj Babbula,
+\textit{SIGCOMM} 2014.}
+\author{Alaelson Jatobá\\Sergio Timoteo}
+
+\institute{University of Campinas} 
+\date{\today} 
+
+\pgfdeclareimage[height=0.5cm]{logo}{figures/unicamplogo}
+\logo{\pgfuseimage{logo}}
+
+%\logo{\includegraphics[height=0.5cm]{figures/unicamplogo}}
+
+
+\begin{document} 
+
+\frame{
+\titlepage
+}
+
+
+\section[Outline]{}
+\frame{
+\transdissolve<1>[duration=0.3]
+\frametitle{Outline}
+\tableofcontents
+}
+
+%Destaca o sumário no início de cada sessão
+\AtBeginSection[]
+{
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\subsection{Motivation}
+\transdissolve<1>[duration=0.3]
+\frame{
+\frametitle{Motivation} 
+The traffic on the inter-datacenter WAN can be roughly characterized as a mix of two types: 
+\begin{description} 
+\item [highpri] traffic Comprises of instantaneously arriving demands due to customer facing tra?ffic;
+	\begin{itemize}
+		\item unpredictable;
+		\item smaller than fully capacity;
+		\item need to be fully met.
+	\end{itemize}
+
+\item [General] Large transfers between datacenters that require WAN.
+\end{description}
+}
+ 
+
+\subsection{Objectives}
+
+\frame{ 
+\frametitle{Objectives}  
+	Characteristics of problems:
+	\begin{itemize} 
+		\item No delays and zero loss rate for high-priority traffic;
+		\item When not limited by network capacity, long-running requests are fully met before the deadline;
+		\item When demands exceed network capacity, continue to offer guarantees such as maximizing the minimal fraction of transfers that finish before deadline (fairness), or maximizing a specified total utility function.
+	\end{itemize} 
+
+} 
+
+
+%\section{A rede ótica}
+%\subsection{Conceitos Básicos}
+%\frame{}
+%\subsection{Componentes}
+%\frame{
+%\begin{itemize}
+	%\item Fibra;
+	%\item Acoplador;
+	%\item \textit{Transponder}
+	%\item Multiplexadores e Demultiplexadores;
+	%\item \textit{Optical cross-connect} (OXC);
+	%\item Amplificadores de fibra dopada com Érbio (EDFA);
+	%\item Compensador de dispersão (DCM)
+%\end{itemize}
+%}
+
+
+\frame{ 
+\frametitle{}
+\begin{center}
+	\Huge Obrigado!
+\end{center}
+}
+
+\end{document}
