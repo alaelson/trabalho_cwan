@@ -14,12 +14,15 @@
 %\usetheme{Antibes} % um dos temas 
 
 \title{Calendaring for Wide Area Networks}
-\subtitle{Srikanth Kandula, Ishai Menache, Roy Schwartz, and Spandana Raj Babbula,
-\textit{SIGCOMM} 2014.}
-\author{Alaelson Jatobá\\Sergio Timoteo}
-
-\institute{University of Campinas} 
-\date{\today} 
+\subtitle{
+\textit{Paper Presentation}}
+\author{Alaelson Jatobá\\
+Sérgio Timóteo}
+\institute{Graduate Program in Electrical Engineering\\
+Computation \& Electrical Engineering School\\
+University of Campinas} 
+\date{June, 18th 2015} 
+%\date{\today} 
 
 \pgfdeclareimage[height=0.5cm]{logo}{figures/unicamplogo}
 \logo{\pgfuseimage{logo}}
@@ -34,11 +37,17 @@
 }
 
 
-\section[Outline]{}
+
+%\section[Outline]{}
 \frame{
 \transdissolve<1>[duration=0.3]
-\frametitle{Outline}
-\tableofcontents
+\frametitle{About the Article}
+\textbf{Calendaring for Wide Area Networks.}\\
+\vspace{\baselineskip}
+\textbf{Srikanth Kandula, Ishai Menache, Roy Schwartz, and Spandana Raj Babbula,
+\textit{SIGCOMM} 2014.}\\
+\vspace{\baselineskip}
+Microsoft Research.
 }
 
 %Destaca o sumário no início de cada sessão
@@ -74,12 +83,15 @@ The traffic on the inter-datacenter WAN can be roughly characterized as a mix of
 
 \frame{ 
 \frametitle{Objectives}  
+\transdissolve<1>[duration=0.3]
 	Characteristics of problems:
 	\begin{itemize} 
 		\item No delays and zero loss rate for high-priority traffic;
 		\item When not limited by network capacity, long-running requests are fully met before the deadline;
-		\item When demands exceed network capacity, continue to offer guarantees such as maximizing the minimal fraction of transfers that finish before deadline (fairness), or maximizing a specified total utility function.
+		\item When demands exceed network capacity, continue to offer guarantees such as maximizing the minimal fraction of transfers that finish before deadline (fairness), or maximizing a specified total utility function.\\
 	\end{itemize} 
+	\vspace{\baselineskip}
+	\textbf{Satisfying all these goals is hard!!! }
 
 } 
 
