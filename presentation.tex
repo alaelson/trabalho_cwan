@@ -1,6 +1,7 @@
 \documentclass{beamer} 
 \usepackage[latin1]{inputenc}
 %\usepackage[brazilian]{babel}
+\usepackage[english]{babel}
 \usepackage{amssymb,amsmath} %para usar simbolos matematicos 
 \usepackage{palatino} 
 %\usepackage{epstopdf}
@@ -12,6 +13,8 @@
 \usetheme{Montpellier} % um dos temas
 %\usetheme{Berkeley} % um dos temas
 %\usetheme{Antibes} % um dos temas 
+
+\defbeamertemplate{description item}{align left}{\insertdescriptionitem\hfill}
 
 \title{Calendaring for Wide Area Networks}
 \subtitle{
@@ -137,7 +140,7 @@ The traffic on the inter-datacenter WAN can be roughly characterized as a mix of
 \frametitle{TEMPUS: Goal}
 \transdissolve<1>[duration=0.3]
 
-Deadline tuple $(\mathnormal{a_i,b_i,d_i,D_i, s_i,t_i,\mathcal{P}_i})$
+%Deadline tuple $(\mathnormal{a_i,b_i,d_i,D_i, s_i,t_i,\mathcal{P}_i})$
 \begin{table}[h]
 	\centering
 		\begin{tabular}{*{2}{cl}}
@@ -218,6 +221,103 @@ An optimization problem:
 \end{center}
 
 }
+
+\section{Evaluation}
+\subsection{Methodology}
+\frame{ 
+\frametitle{Evaluation: Methodology}
+\transdissolve<1>[duration=0.3]
+\begin{itemize}
+	\item Microsoft's production WAN: 
+	\begin{itemize}
+		\item 40 Nodes $\rightarrow$ PoPs;
+		\item 280 Edges $\rightarrow$ bundles of optical links;
+	\end{itemize} 
+	\item Other: larger synthetic topologies;
+	\end{itemize}
+
+}
+	
+\frame{ 
+\frametitle{Evaluation: Methodology}
+\transdissolve<1>[duration=0.3]
+\begin{itemize}
+	\item Collected netflow data at every ingress into the WAN;
+		\begin{itemize}
+			\item Couldn't identify witch flow belongs to a single request;
+			\item Interview the cluster operator: distribution of sizes, duration between arrival and hard deadlines
+		\end{itemize}
+	\item 5 minutes averages of traffic sent between PoPs;
+	\begin{itemize}
+		\item 1 day worth of data overall;
+	\end{itemize}
+	\item Highpri traffic identified from discussion with cluster operators;
+	\begin{itemize}
+		\item[-] Recall:
+		\item unpredictable amount of demand that arrives in each time step and has to be completely satisfed;
+		\item  The remaining traffic portion, which is the bulk of the bytes on the WAN,
+are attributed to large requests;
+	\end{itemize}
+\end{itemize}
+
+\vspace{\baselineskip}
+\begin{center}
+%\textbf{Using Linear problem with an approach by Young's method} 
+\end{center}
+}
+
+\frame{ 
+\frametitle{Evaluation: Methodology}
+\transdissolve<1>[duration=0.3]
+	\begin{itemize}
+		\item Given a trafic demand between a pair of PoPs,
+		\begin{itemize}
+		 		\item repeat distributions to generate large transfer requests;
+		\end{itemize}
+		\item Metrics:
+
+		\setbeamertemplate{description item}[align left]
+		\begin{description}[Total utility or $(\delta)$]
+			\item[Load factor] a constante factor to scale the matric demand matrix;
+			%\item Load factor 
+			%\item[MinFract ($\alpha$)] minimum of the fraction of request that is transferred before deadline; Maximum $\alpha$ is good! 
+			\item[MinFract ($\alpha$)] minimum of the fraction of request that is transferred before deadline;
+%			\item[Requests finishing before deadline] how many requests finish on time. When the network load is low, carrying as much flow as possible will satisfy all (or most) deadlines. However, as the network load increases, finishing more requests on time requires carefully spreading traffic across available paths and time. Also, there is a tension between finishing more requests vs. offering a minimum guarantee to every request.
+			\item[Requests finishing before deadline] a binary value;
+%			\item[Total utility or $(\delta)$] The total utility from carrying traffic. A non-negative number per timestep to depict the value per unit demand that is satisfied at that time step. A calendaring solution should maximize utility. However, there is a similar tension between maximizing $\alpha$ (the min. share of a request) versus maximizing $\delta$.
+			\item[Total utility or $(\delta)$] from carrying traffic;
+%				\item[Promise] A guarantee is only useful if provided pre-facto. Whereas $alpha$ above measures the minimum post-facto fraction that each request gets served, with promise, we measure what the calendaring solution can guarantee ahead of time to each request.
+			\item[Promise] a guarantee is only useful if provided pre-facto ahead of time to each request.
+		\end{description}
+
+\end{itemize}
+}
+
+
+\frame{ 
+\frametitle{Evaluation: Methodology}
+\transdissolve<1>[duration=0.3]
+	\begin{itemize}
+		\item Compared schemes:
+		\setbeamertemplate{description item}[align left]
+		\begin{description}[Tempus]
+			\item[Offline Optimal (Gurobi)] Has two Linear Program (LP) solvers: 
+				\begin{itemize}
+					\item First: Max $\alpha$;
+				 	\item Second: Max $\delta$ as function of $\alpha$
+				 \end{itemize}
+			\item[Tempus] Has three implementations:
+				\begin{itemize}
+					\item Offline (Uses Young's method instead LP), Online and Parallel;
+				\end{itemize}			
+			 
+			\item[Greedy MaxFlow] An online solution. Doesn't plan into the future. Maximize the total flow can be served in the current time step; 
+			\item[Greedy MaxMinFract] Like above, but maximize only $\alpha$ served for all pending requests.
+		\end{description}
+
+\end{itemize}
+}
+
 
 \frame{ 
 \frametitle{}
