@@ -1,6 +1,6 @@
 \documentclass{beamer} 
 \usepackage[latin1]{inputenc}
-\usepackage[brazilian]{babel}
+%\usepackage[brazilian]{babel}
 \usepackage{amssymb,amsmath} %para usar simbolos matematicos 
 \usepackage{palatino} 
 %\usepackage{epstopdf}
@@ -67,10 +67,15 @@ Microsoft Research.
 \frametitle{Motivation} 
 \begin{itemize} 
 \item \textit{Calendaring}:
+\vspace{\baselineskip}
 \begin{itemize}
-	\item Setting aside future resources so that long term objectives are met in spite of short-term demands for resources;
-	\item Funções de OAM\&P: manuais, demoradas e de alto custo;
-	\newline
+	\item <1->Refer to setting aside future resources so that long term objectives are met in spite of short-term demands for resources;
+	\vspace{\baselineskip}
+	\item <2->Several large cloud companies operate geo-distributed datacenters connected through a WAN;
+	\vspace{\baselineskip}
+	\item <3-> Order of Terabits per seconds.
+	%\only<3>{Order of Terabits per seconds.}
+	
 \end{itemize}
 \end{itemize}
 }
@@ -110,22 +115,109 @@ The traffic on the inter-datacenter WAN can be roughly characterized as a mix of
 } 
 
 
-%\section{A rede ótica}
-%\subsection{Conceitos Básicos}
-%\frame{}
-%\subsection{Componentes}
-%\frame{
-%\begin{itemize}
-	%\item Fibra;
-	%\item Acoplador;
-	%\item \textit{Transponder}
-	%\item Multiplexadores e Demultiplexadores;
-	%\item \textit{Optical cross-connect} (OXC);
-	%\item Amplificadores de fibra dopada com Érbio (EDFA);
-	%\item Compensador de dispersão (DCM)
-%\end{itemize}
-%}
+\section{TEMPUS}
+\subsection{Goal}
+\frame{
+\frametitle{TEMPUS: Goal}
+\transdissolve<1>[duration=0.3]
+\begin{itemize}
+	\item The goal of \texttt{Tempus} is to accommodate the long-getm requests, while leaving enough capacity for ad-hoc high-priority requests;
+	\item Distribute the long-running requests over time and network paths using available information;
+	\item \textit{Key aspects:}
+	\begin{itemize}
+	\item Graph $G = (V,E)$, where $|V| = n$ (nodes) and $|E| = m$ (edges);
+	\item Non negative edge capacities $c : E \rightarrow \mathcal{R}^+ $;
+	\item Each long-term request $i$, its deadline is the tuple ($\mathnormal{a_i,b_i,d_i,D_i, s_i,t_i,\mathcal{P}_i}$);	
+\end{itemize}
+\end{itemize}
+}
 
+
+\frame{
+\frametitle{TEMPUS: Goal}
+\transdissolve<1>[duration=0.3]
+
+Deadline tuple $(\mathnormal{a_i,b_i,d_i,D_i, s_i,t_i,\mathcal{P}_i})$
+\begin{table}[h]
+	\centering
+		\begin{tabular}{*{2}{cl}}
+			\hline\hline
+    Parameter & Description \\
+    \hline
+		$\mathnormal{i}$  & $\mathnormal{request}$ \\
+    $\mathnormal{a_i}$  & $\mathnormal{aware\ time}$ \\
+		$\mathnormal{b_i}$  & $\mathnormal{begin\ time}$ \\
+		$\mathnormal{d_i}$  & $\mathnormal{deadline}$ \\
+		$\mathnormal{D_i}$  & $\mathnormal{demand}$ \\
+		$\mathnormal{s_i}$  & $\mathnormal{source}$\ node \\
+		$\mathnormal{t_i}$  & $\mathnormal{target}$\ node \\
+		$\mathnormal{\mathcal{P}_i}$ & path\ collection from $\mathnormal{s_i}$ to $\mathnormal{t_i}$\\
+		$\mathnormal{t}$  & $\mathnormal{time}$ \\
+		$\mathnormal{e}$  & edge\\
+		$\mathnormal{c_e}$  & fraction\ of\ capacity\ of\ edge\\
+		
+   \hline\hline
+		\end{tabular}
+	\caption{Long-term requests deadline parameters}
+	\label{tab:request_param}
+\end{table}
+
+}
+
+\frame{ 
+\frametitle{TEMPUS: Goal}
+\transdissolve<1>[duration=0.3]
+
+The algorithm has an estimate for the request with:
+\vspace{\baselineskip}
+\begin{itemize}
+
+	\item High priority has a fraction of the capacity $\mathnormal{c_e}$ of edge $\mathnormal{e}$ $$(\chi_{e,t})$$
+	\item Long-term has the remain fraction $$(1-\chi_{e,t})$$
+	
+\end{itemize}
+}
+
+%\section{TEMPUS}
+\subsection{Offline version}
+\frame{ 
+\frametitle{TEMPUS: Offline Version}
+\transdissolve<1>[duration=0.3]
+
+An optimization problem:
+\vspace{\baselineskip}
+\begin{itemize}
+
+	\item Amount of flow need to be allocated in time.
+	\item Linear inequalities can be formulated to assert the allocation's feasibility: every time and every edge can't exceed the available capacity;
+	\item The traffic can only be routed when there is enough time to serve the total demand;
+	\item Maxmizing the minimum fraction of request traffic routed before deadline.
+\end{itemize}
+\vspace{\baselineskip}
+\begin{center}
+\textbf{The offline problem assumes perfect future knowledge of all requests.} \textbf{It isn't a practical solution.}
+\end{center}
+}
+
+\subsection{Online version}
+\frame{ 
+\frametitle{TEMPUS: Online Version}
+\transdissolve<1>[duration=0.3]
+\begin{itemize}
+	\item The offline version is fairness for future requests;
+	\item The offline has high computational cost;
+	\item To solve it, the online version TEMPUS reduce the time to serve at each request. 
+	\item With this, aims to offer large promises early in the lifetime of the request.
+	\item All of the previously promised allocation are retained for future high priority traffic;
+	\item None of the work that has been done by the previous request (flow allocation) needs to be redone which speeds-up the computations cost.
+\end{itemize}
+
+\vspace{\baselineskip}
+\begin{center}
+\textbf{Using Linear problem with an approach by Young's method} 
+\end{center}
+
+}
 
 \frame{ 
 \frametitle{}
